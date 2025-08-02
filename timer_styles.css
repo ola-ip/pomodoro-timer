@@ -1,0 +1,419 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #C04A4A;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .app { width: 100%; max-width: 600px; }
+
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .top-bar button {
+      background: transparent;
+      border: 1px solid white;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .timer {
+      background: #b33a3a;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+    }
+
+    .tabs button {
+      background: transparent;
+      border: none;
+      color: white;
+      margin: 0 8px;
+      padding: 8px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+    .tabs .active { background: #942e2e; }
+
+    .time {
+      font-size: 4em;
+      margin: 20px 0;
+    }
+
+    #startStopBtn {
+      padding: 12px 25px;
+      background: white;
+      color: #942e2e;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    #startStopBtn:hover { background: #f1f1f1; }
+
+    .status-bar {
+      margin-top: 10px;
+      font-size: 0.9em;
+      text-align: center;
+      opacity: 0.9;
+    }
+
+    .tasks {
+      background: #b33a3a;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    #taskList {
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .tasks-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      color: white;
+    }
+    .menu-icon {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+      line-height: 1;
+    }
+
+    .menu-icon:hover {
+      opacity: 0.8;
+    }
+    
+    .tasks-header-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .tasks-header h2 {
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+
+    .task {
+      background: white;
+      color: black;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      border-left: 4px solid transparent;
+      transition: border-left-color 0.2s ease;
+      margin-top: 15px;
+    }
+    
+    .task.selected {
+      border-left-color: black;
+    }
+
+    .task-name {
+      font-size: 1em;
+      font-weight: 500;
+      outline: none;
+      cursor: text;
+      user-select: text;
+      min-height: 1.2em;
+      color: black; /* Default text color */
+    }
+
+    .task-name[contenteditable="true"] {
+      border-bottom: 1px solid #942e2e;
+      padding-bottom: 2px;
+      color: black; /* Black color while editing */
+    }
+
+    .task-menu-container {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+    }
+
+    .task-menu-container button {
+      background: #ddd;
+      border: none;
+      color: black;
+      font-size: 1em;
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .task-menu-container button:hover {
+      background: #ccc;
+    }
+
+    /* Edit footer styling */
+    #editTaskFooter {
+      background: rgba(221, 221, 221, 0.9); /* translucent version of #ddd */
+      border-top: 1px solid #ccc;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 0 0 6px 6px;
+      margin-top: 10px;
+      color: black;
+      backdrop-filter: blur(2px);
+      gap: 15px;
+    }
+
+    #editTaskFooter .edit-actions-container {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      justify-content: flex-end;
+    }
+
+    #editTaskFooter button {
+      min-width: 80px;
+      padding: 8px 15px;
+      font-weight: bold;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: all 0.2s ease;
+    }
+
+    #editTaskFooter .delete {
+      background: #ff6b6b;
+      color: white;
+    }
+
+    #editTaskFooter .cancel {
+      background: #ddd;
+      color: black;
+    }
+
+    #editTaskFooter .save {
+      background: #942e2e;
+      color: white;
+    }
+
+    #editTaskFooter button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    #editTaskFooter .pomodoro-count {
+      margin: 0;
+    }
+
+    #editTaskFooter .pomodoro-count input {
+      width: 60px;
+      padding: 6px;
+    }
+
+    #addTaskForm {
+      background: white;
+      color: black;
+      border-radius: 6px;
+      padding: 15px;
+      margin-top: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    #addTaskForm input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    .form-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .form-footer .notes {
+      font-size: 0.9em;
+      color: #555;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .form-footer .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .form-footer button {
+      padding: 6px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .form-footer .cancel {
+      background: #ddd;
+      color: black;
+    }
+
+   .form-footer .save {
+  background: #942e2e;
+  color: white;
+  padding: 6px 15px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #942e2e;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: filter .2s ease;
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn-primary:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+
+    /* Modal styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .modal h2 {
+      margin-bottom: 20px;
+      color: #942e2e;
+    }
+
+    .setting-group {
+      margin-bottom: 15px;
+    }
+
+    .setting-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .setting-group input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .modal-actions button {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .modal-actions button:first-child {
+      background: #942e2e;
+      color: white;
+    }
+
+    .modal-actions button:last-child {
+      background: #ddd;
+    }
+
+    #addTaskBtn {
+      background: #b33a3a;
+      color: white;
+      border: 1px dashed white;
+      padding: 12px;
+      width: 100%;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+     .pomodoro-count {
+    margin-bottom: 10px;
+  }
+
+  .pomodoro-count label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: black;
+  }
+
+  .pomodoro-count select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+  }

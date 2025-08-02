@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="timer_styles.css">
+</head>
+<body>
+  <div class="app">
+    <div class="top-bar">
+     <button onclick="viewReport()">Report</button>
+      <button onclick="showSettings()">Settings</button>
+      <button>Sign In</button>
+    </div>
+
+    <div id="settingsModal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <h2>Timer Settings</h2>
+        <div class="setting-group">
+          <label for="pomodoroDuration">Pomodoro (minutes):</label>
+          <input type="number" id="pomodoroDuration" min="1" max="60" value="25">
+        </div>
+        <div class="setting-group">
+          <label for="shortBreakDuration">Short Break (minutes):</label>
+          <input type="number" id="shortBreakDuration" min="1" max="60" value="5">
+        </div>
+        <div class="setting-group">
+          <label for="longBreakDuration">Long Break (minutes):</label>
+          <input type="number" id="longBreakDuration" min="1" max="60" value="15">
+        </div>
+        <div class="modal-actions">
+          <button onclick="saveSettings()">Save</button>
+          <button onclick="hideSettings()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="timer">
+      <div class="tabs">
+        <button class="tab active" onclick="setMode('pomodoro')">Pomodoro</button>
+        <button class="tab" onclick="setMode('short')">Short Break</button>
+        <button class="tab" onclick="setMode('long')">Long Break</button>
+      </div>
+      <div class="time" id="time">25:00</div>
+   <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+  <button id="startPauseBtn" class="btn-primary">START</button>
+  <button id="continueBtn" class="btn-primary" disabled>CONTINUE</button>
+  <button id="stopBtn" class="btn-primary" disabled>STOP</button>
+</div>
+
+
+
+    </div>
+
+    <div class="tasks">
+      <div class="tasks-header">
+        <h2>Tasks</h2>
+        <div class="tasks-header-buttons">
+          <button class="menu-icon" title="Clear all tasks" onclick="clearAllTasks()">🗑️</button>
+          <button class="menu-icon" title="Tasks options" onclick="toggleTasksVisibility()">&#8942;</button>
+        </div>
+      </div>
+
+      <div id="taskList" style="display: none;"></div>
+
+      <div id="addTaskForm" style="display: none;">
+        <input type="text" id="taskNameInput" placeholder="Task name (e.g. Python)" />
+        
+        <div class="pomodoro-count">
+          <label>No. of Pomodoros:</label>
+          <input type="number" id="estPomoInput" min="1" value="1">
+        </div>
+        <div class="form-footer">
+          <div class="notes">
+            + Add Note · + Add Project
+          </div>
+          <div class="actions">
+            <button class="cancel" onclick="clearForm()">Cancel</button>
+            <button class="save" onclick="saveTask()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button id="addTaskBtn" onclick="showTaskForm()">+ Add Task</button>
+  </div>
+
+  
+  <script src="timer_script.js"></script>
+</body>
+</html>
